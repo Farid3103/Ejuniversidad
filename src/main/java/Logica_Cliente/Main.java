@@ -4,6 +4,9 @@
  */
 package Logica_Cliente;
 
+import static Helpers.HelperValidacion.RetornarCEV2;
+import static Helpers.HelperValidacion.RetornarLetra;
+import static Helpers.HelperValidacion.ValidarVacio;
 import Logica_Negocio.Estudiante;
 import Logica_Negocio.Universidad;
 import java.util.ArrayList;
@@ -19,22 +22,58 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
        String nombre_Est,identificacion ;
        String nombre,nit ;
        ArrayList<Estudiante> lsestudiantes= new ArrayList<>();
-       int num_Est;
+       int num_Est,rta,conteo,conte;
        Scanner scan = new Scanner(System.in);
+       
        //Pedimos el numero de estudiantes a registrar
        System.out.println("Digite el numero de estudiantes");
         num_Est=scan.nextInt();
+        
+        scan.nextLine();
+        
+        
        //Pedimos el nombre y identificacion mediante el ciclo for por cada estudiante 
        for (int i = 0; i < num_Est; i++) {
-           System.out.print("Digite el nombre del estudiante: ");
-            nombre_Est=scan.next();
+           System.out.println("Digite el nombre del estudiante: ");
+            nombre_Est=scan.nextLine();
+            rta = Helpers.HelperValidacion.ValidarVacio(nombre_Est);
             
-           System.out.print("Digite la identificacion del estudiante: ");
+            while (rta > 0) {
+                System.out.println("Digite el nombre del estudiante: ");
+                nombre_Est=scan.nextLine();
+                 rta = Helpers.HelperValidacion.ValidarVacio(nombre_Est);
+            }
+            
+              conteo = Helpers.HelperValidacion.ValidarTodo(nombre_Est);
+
+              while (conteo != 0) {
+                System.out.println("Digite el nombre del estudiante: ");
+                nombre_Est = scan.nextLine();
+                conteo = Helpers.HelperValidacion.ValidarTodo(nombre_Est);
+              }
+              //pedimos numero de identificacion
+           System.out.println("Digite la identificacion del estudiante: ");
            identificacion=scan.next();
-           //Creamos un estudiante con los datos que ingreso   
+             rta = Helpers.HelperValidacion.ValidarTodoLetra(identificacion);
+             
+             scan.nextLine();
+             
+              while (rta > 0) {
+                System.out.println("Digite la identificacion del estudiante: ");
+                identificacion=scan.nextLine();
+                 rta = Helpers.HelperValidacion.ValidarTodoLetra(identificacion);
+              }
+                while (conteo != 0) {
+                System.out.println("Digitela identificacion del estudiante: ");
+                identificacion= scan.nextLine();
+                conteo = Helpers.HelperValidacion.ValidarTodoLetra(identificacion);
+              }
+           
+            //Creamos un estudiante con los datos que ingreso   
            Estudiante objEstudiante= new Estudiante(nombre_Est,identificacion);
            lsestudiantes.add(objEstudiante);
             
@@ -46,11 +85,43 @@ public class Main {
          * porque solo es para ingresar una universidad
          * 
         */
-        System.out.println("Digite el nombre de la universidad");
+        System.out.println("Digite el nombre de la universidad: ");
         nombre=scan.next();
+        rta = Helpers.HelperValidacion.ValidarVacio(nombre);
+            
+          scan.nextLine();
+          
+            while (rta > 0) {
+            System.out.println("Digite el nombre de la universidad: ");
+            nombre=scan.nextLine();
+            rta = Helpers.HelperValidacion.ValidarVacio(nombre);
+            }
+            
+              conteo = Helpers.HelperValidacion.ValidarTodo(nombre);
+
+              while (conteo != 0) {
+              System.out.println("Digite el nombre de la universidad: ");
+              nombre = scan.nextLine();
+              conteo = Helpers.HelperValidacion.ValidarTodo(nombre);
+              }
         
-        System.out.println("Digite el nit de la universidad");
+        System.out.println("Digite el nit de la universidad: ");
         nit=scan.next();
+        
+             rta = Helpers.HelperValidacion.ValidarTodoLetra(nit);
+             
+             scan.nextLine();
+             
+             while (rta > 0) {
+             System.out.println("Digite el nit de la universidad: ");
+             nit=scan.nextLine();
+             rta = Helpers.HelperValidacion.ValidarTodoLetra(nit);
+              }
+                while (conteo != 0) {
+                System.out.println("Digite el nit de la universidad: ");
+                nit= scan.nextLine();
+                conteo = Helpers.HelperValidacion.ValidarTodoLetra(nit);
+              }
         //Aqui crea la universidad con los datos que ingresaron
         Universidad objUniversidad= new Universidad(nombre,nit,lsestudiantes);
         /**
