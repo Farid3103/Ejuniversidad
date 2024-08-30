@@ -10,6 +10,7 @@ import static Helpers.HelperValidacion.ValidarVacio;
 import Logica_Negocio.Estudiante;
 import Logica_Negocio.Universidad;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -26,16 +27,20 @@ public class Main {
        String nombre_Est,identificacion ;
        String nombre,nit ;
        ArrayList<Estudiante> lsestudiantes= new ArrayList<>();
-       int num_Est,rta,conteo,conte;
+       int num_Est = 0,rta,conteo,conte;
        Scanner scan = new Scanner(System.in);
        
        //Pedimos el numero de estudiantes a registrar
+       do{
+        try {   
        System.out.println("Digite el numero de estudiantes");
         num_Est=scan.nextInt();
-        
-        scan.nextLine();
-        
-        
+        } catch (InputMismatchException e){
+            System.out.println("Error:");
+       } 
+         scan.nextLine();
+       }while ( num_Est<=0);
+       
        //Pedimos el nombre y identificacion mediante el ciclo for por cada estudiante 
        for (int i = 0; i < num_Est; i++) {
            System.out.println("Digite el nombre del estudiante: ");
